@@ -3,7 +3,7 @@ plugins {
     id 'maven-publish'
 }
 
-group 'xyz.duncanruns.julti.erik_deadly'
+group 'xyz.duncanruns.julti'
 version '1.4.5'
 
 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -55,7 +55,7 @@ jar {
 
     manifest {
         // Thanks to answers from this: https://stackoverflow.com/questions/33020069/how-to-get-version-attribute-from-a-gradle-build-to-be-included-in-runtime-swing
-        attributes 'Main-Class': 'xyz.duncanruns.julti.erik_deadly.JultiAppLaunch',
+        attributes 'Main-Class': 'xyz.duncanruns.julti.JultiAppLaunch',
                 'Multi-Release': true,
                 'Implementation-Version': version
     }
