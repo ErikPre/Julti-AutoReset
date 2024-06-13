@@ -115,6 +115,9 @@ public final class JultiOptions {
     public int resetCounter = 0;
     public boolean minimizeToTray = false;
 
+    // AutoReset
+    public boolean saveImages = false;
+    public String imageSaveFolder = "";
 
     // Affinity
     public boolean useAffinity = true;

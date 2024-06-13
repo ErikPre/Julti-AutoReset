@@ -1,9 +1,14 @@
 package xyz.duncanruns.julti.resetting;
 
+import com.sun.jna.Native;
+import com.sun.jna.PointerType;
+import com.sun.jna.platform.win32.WinDef;
+import com.sun.jna.win32.StdCallLibrary;
 import org.apache.logging.log4j.Level;
 import xyz.duncanruns.julti.Julti;
 import xyz.duncanruns.julti.JultiOptions;
 import xyz.duncanruns.julti.affinity.AffinityManager;
+import xyz.duncanruns.julti.autoreset.WindowCapture;
 import xyz.duncanruns.julti.instance.MinecraftInstance;
 import xyz.duncanruns.julti.management.ActiveWindowManager;
 import xyz.duncanruns.julti.management.InstanceManager;
@@ -13,9 +18,12 @@ import xyz.duncanruns.julti.util.KeyboardUtil;
 
 import javax.annotation.Nullable;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+
 
 public abstract class ResetManager {
     private List<Integer> defaultInstanceZOrder = null;
@@ -187,10 +195,13 @@ public abstract class ResetManager {
     }
 
     public boolean lockInstance(MinecraftInstance instance) {
+        WindowCapture.captureInstance(instance, true);
+        System.out.println("Save - good");
         if (JultiOptions.getJultiOptions().prepareWindowOnLock) {
             // We use doLater because this is a laggy method that isn't incredibly important.
             Julti.doLater(() -> instance.ensurePlayingWindowState(true));
         }
+
         PluginEvents.InstanceEventType.LOCK.runAll(instance);
         return false;
     }

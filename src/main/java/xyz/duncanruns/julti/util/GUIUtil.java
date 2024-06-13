@@ -316,6 +316,39 @@ public final class GUIUtil {
         return panel;
     }
 
+    public static Component createSaveImagesToggle() {
+        JultiOptions options = JultiOptions.getJultiOptions();
+        boolean current = options.saveImages;
+        JCheckBox checkBox = new JCheckBox("Save Images");
+        checkBox.setSelected(current);
+        checkBox.addActionListener(e -> {
+            boolean newCurrent = checkBox.isSelected();
+            queueOptionChangeAndWait("saveImages", newCurrent);
+        });
+        return checkBox;
+    }
+
+    public static Component createImageSaveFolderBrowser() {
+        JultiOptions options = JultiOptions.getJultiOptions();
+        String current = options.imageSaveFolder;
+        JButton button = new JButton(current.isEmpty() ? "No Folder Selected" : current);
+        button.addActionListener(e -> {
+            JFileChooser jfc = new JFileChooser();
+            jfc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+            jfc.setDialogTitle("Julti: Choose Folder");
+            jfc.setCurrentDirectory(Paths.get(current).toFile());
+
+            int val = jfc.showOpenDialog(null);
+            if (val == JFileChooser.APPROVE_OPTION) {
+                String chosen = jfc.getSelectedFile().toPath().toString();
+                queueOptionChangeAndWait("imageSaveFolder", chosen);
+                button.setText(chosen);
+            }
+        });
+        return button;
+    }
+
+
     public static void setActualSize(Component component, int x, int y) {
         Dimension d = new Dimension(x, y);
         component.setSize(d);

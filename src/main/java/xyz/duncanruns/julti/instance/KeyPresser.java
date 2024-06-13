@@ -4,6 +4,8 @@ import com.sun.jna.platform.win32.Win32VK;
 import com.sun.jna.platform.win32.WinDef.HWND;
 import xyz.duncanruns.julti.util.KeyboardUtil;
 
+import java.security.Key;
+
 public class KeyPresser {
     private final HWND hwnd;
 
@@ -19,6 +21,12 @@ public class KeyPresser {
         KeyboardUtil.sendKeyDownToHwnd(this.hwnd, Win32VK.VK_F3);
         KeyboardUtil.sendKeyToHwnd(this.hwnd, Win32VK.VK_ESCAPE);
         KeyboardUtil.sendKeyUpToHwnd(this.hwnd, Win32VK.VK_F3);
+    }
+
+    public void pressF2() {
+        KeyboardUtil.sendKeyDownToHwnd(this.hwnd, Win32VK.VK_F2);
+        KeyboardUtil.sendKeyToHwnd(this.hwnd, Win32VK.VK_F2);
+        KeyboardUtil.sendKeyUpToHwnd(this.hwnd, Win32VK.VK_F2);
     }
 
     public void pressF1() {

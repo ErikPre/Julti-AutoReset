@@ -3,6 +3,7 @@ package xyz.duncanruns.julti.resetting;
 import xyz.duncanruns.julti.Julti;
 import xyz.duncanruns.julti.JultiOptions;
 import xyz.duncanruns.julti.affinity.AffinityManager;
+import xyz.duncanruns.julti.autoreset.WindowCapture;
 import xyz.duncanruns.julti.instance.InstanceState;
 import xyz.duncanruns.julti.instance.MinecraftInstance;
 import xyz.duncanruns.julti.management.ActiveWindowManager;
@@ -207,6 +208,8 @@ public class WallResetManager extends ResetManager {
     }
 
     public boolean resetInstance(MinecraftInstance instance) {
+        WindowCapture.captureInstance(instance, false);
+        System.out.println("Save - bad");
         return this.resetInstance(instance, false);
     }
 

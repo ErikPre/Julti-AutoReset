@@ -24,6 +24,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static xyz.duncanruns.julti.util.GUIUtil.createImageSaveFolderBrowser;
+import static xyz.duncanruns.julti.util.GUIUtil.createSaveImagesToggle;
+
 public class OptionsGUI extends JFrame {
     private static OptionsGUI instance = null;
     private boolean closed = false;
@@ -745,6 +748,13 @@ public class OptionsGUI extends JFrame {
             panel.add(GUIUtil.createSpacer());
         }
         panel.add(GUIUtil.leftJustify(GUIUtil.createValueChangerButton("clipboardOnReset", "Clipboard On Reset", this)));
+        panel.add(GUIUtil.createSpacer());
+        panel.add(GUIUtil.createSeparator());
+        panel.add(GUIUtil.createSpacer());
+        panel.add(GUIUtil.createSpacer());
+        panel.add(GUIUtil.leftJustify(createSaveImagesToggle()));
+        panel.add(GUIUtil.leftJustify(new JLabel("Image Save Folder: ")));
+        panel.add(GUIUtil.leftJustify(createImageSaveFolderBrowser()));
     }
 
     public void reload() {
